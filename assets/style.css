@@ -88,14 +88,18 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
 }
-
-li:hover {
+li a{
+	text-decoration: none;
+	color: black;
+}
+li a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -124,6 +128,28 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+.filtres{
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+padding-bottom: 40px;
+}
+.filtres button{
+	font-size: 16px;
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 37px;
+	border-radius: 60px;
+	border: 1px;
+	border: 1px solid #1D6154;
+	color:#1D6154 ;
+	line-height: 19px;
+	font-weight: 700;
+}
+.filtres button:hover{
+	background: #1D6154;
+	color: white;
 }
 .gallery {
 	width: 100%;
