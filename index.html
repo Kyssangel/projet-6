@@ -53,20 +53,6 @@
         <h2>Mes Projets</h2>
         <a href="#modal1" class="js-modal">modifier</a>
 
-        <aside
-          id="modal1"
-          class="modal"
-          aria-hidden="true"
-          role="dialog"
-          aria-labelledby="titlemodal"
-          style="display: none"
-        >
-          <div class="modal-wrapper js-modal-stop" >
-            <h1 id="titlemodal">contenue modal</h1>
-            <button class="js-modal-close">fermer la boite modal</button>
-          </div>
-        </aside>
-
         <div class="filtres"></div>
 
         <div class="gallery"></div>
@@ -85,7 +71,34 @@
         </form>
       </section>
     </main>
-
+    <aside
+      id="modal1"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="titlemodal"
+      style="display: none"
+    >
+      <div class="modal-wrapper js-modal-stop">
+        <h1 id="titlemodal">contenue modal</h1>
+        <button class="js-modal-close">fermer la boite modal</button>
+        <a href="#modal2" class="js-modal">Vers modale 2</a>
+      </div>
+    </aside>
+    <aside
+    id="modal2"
+    class="modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-labelledby="titlemodal2"
+    style="display: none"
+  >
+    <div class="modal-wrapper js-modal-stop">
+      <h1 id="titlemodal2">contenue modal 2</h1>
+      <a href="#modal1" class="js-modal">retour modal 1</a>
+      <button class="js-modal-close">fermer la boite modal</button>
+    </div>
+  </aside>
     <footer>
       <nav>
         <ul>
@@ -93,6 +106,7 @@
         </ul>
       </nav>
     </footer>
+
     <script src="./scripts/main.js"></script>
     <script src="./scripts/modal.js"></script>
   </body>

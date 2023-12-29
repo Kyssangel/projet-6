@@ -3,6 +3,8 @@ const filtres = document.querySelector(".filtres");
 
 let works = [];
 let categories = [];
+let isAdmin = sessionStorage.getItem('token')
+
 
 const getWorks = async () => {
   const response = await fetch("http://localhost:5678/api/works");
@@ -71,6 +73,11 @@ const init = async () => {
 };
 
 init();
+
+if (isAdmin !== null) {
+  console.log('dans ces accolades, tu geres le mode admin')
+  filtres.style.display = 'none';
+}
 
 /*let attempt = 3; 
 function validate(){

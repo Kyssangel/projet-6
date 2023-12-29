@@ -81,6 +81,7 @@ form.addEventListener("submit", async (event) => {
     const token = await response.json();
     console.log(token.token);
     sessionStorage.setItem("token", token.token);
+    window.location.assign('/')
   }
 });
 
