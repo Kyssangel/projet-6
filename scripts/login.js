@@ -85,33 +85,4 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-function submit() {
-  // Vérifier la combinaison utilisateur-mot de passe (exemple simple)
-  if (baliseEmail === "mail" && balisePassword === "pass") {
-    // Combinaison correcte, rediriger vers la page d'accueil
-    window.location.href = "accueil.html";
-    console.log(oui);
-    // Stocker la configuration (exemple avec localStorage)
-    sessionStorage.setItem("utilisateur", baliseEmail);
-  }
-}
 
-/*const alredyLoggedError = document.querySelector(".alredyLogged__error"); 
-// Si l'utilisateur est déjà connecté, on supprime le token
-function alredyLogged() {
-    if (sessionStorage.getItem("token")) {
-        sessionStorage.removeItem("token");
-        
-        const p = document.createElement("p");
-        p.innerHTML = "<br><br><br>Vous avez été déconnecté, veuillez vous reconnecter";
-        alredyLoggedError.appendChild(p);
-        return;
-        
-    }
-}*/
-//const tokens = await connect(baliseEmail, balisePassword)
-
-//le nom d'utilisateur et le mot de passe doivent être récupérés depuis un formulaire par exemple const tokens = await connect(baliseEmail, balisePassword)
-
-/* Le localStorage ne stocke que des chaines de caractères nous devons donc faire appel à la méthode "JSON.stringify" 
-sessionStorage.setItem("tokens", JSON.stringify(tokens));*/
