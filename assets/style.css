@@ -211,4 +211,27 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+/*modal*/
+*{box-sizing: border-box;}
+.modal{
+	position: fixed;
+	display:flex ;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper{
+	width: 600px;
+	height: 400px;
+padding: 20px;
+background-color: white;
+max-width: calc(100vw - 20px);
+max-height: calc(100vh - 20px);
+overflow: auto;
+}
+
 
