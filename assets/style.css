@@ -214,6 +214,11 @@ footer nav ul {
 /*********modal**************/
 
 *{box-sizing: border-box;}
+
+*:focus{
+	box-shadow: 0 0 10px blue;
+}
+
 .modal{
 	position: fixed;
 	display:flex ;

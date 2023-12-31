@@ -1,6 +1,7 @@
 let modal = null
 const focusableSelector = "button,a"
 let focusables = []
+let previouslyFocusedElement = null
 
 const openModal = function (e) {
   if (modal) {
@@ -11,6 +12,8 @@ const openModal = function (e) {
   e.preventDefault()
   modal = document.querySelector(e.target.getAttribute("href"))
   focusables = Array.from(modal.querySelectorAll(focusableSelector))
+  previouslyFocusedElement = document.querySelector(':focus')
+  focusables[0].focus()
   modal.style.display = null
   modal.removeAttribute("aria-hidden")
   modal.setAttribute("aria-modal", "true")
@@ -46,9 +49,16 @@ const stopPropagation = function (e) {
 const focusInModal = function (e) {
   e.preventDefault()
   let index = focusables.findIndex((f) => f === modal.querySelector(":focus"))
-  index++
+  if (e.shiftkey === true) {
+    index--
+  }else{
+    index++
+  }
   if (index >= focusables.length){
     index = 0
+  }
+  if (index < 0) {
+    index = focusables.length - 1
   }
   focusables[index].focus()
 }
