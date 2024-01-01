@@ -1,82 +1,92 @@
-let modal = null
-const focusableSelector = "button,a"
-let focusables = []
-let previouslyFocusedElement = null
+let modal = null;
+const focusableSelector = "button,a";
+let focusables = [];
+let previouslyFocusedElement = null;
 
-const openModal = function (e) {
+const openModal = async function (e) {
   if (modal) {
-    closeModal(e)
+    closeModal(e);
     modal = null;
   }
   if (!modal) {
-  e.preventDefault()
-  modal = document.querySelector(e.target.getAttribute("href"))
-  focusables = Array.from(modal.querySelectorAll(focusableSelector))
-  previouslyFocusedElement = document.querySelector(':focus')
-  focusables[0].focus()
-  modal.style.display = null
-  modal.removeAttribute("aria-hidden")
-  modal.setAttribute("aria-modal", "true")
-
-  modal.addEventListener("click", closeModal)
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-  modal
-    .querySelector(".js-modal-stop")
-    .addEventListener("click", stopPropagation)
+    e.preventDefault();
+    const target = e.target.getAttribute("href");
+    if (target.startsWith("#")) {
+      modal = document.querySelector(target);
+    } else {
+      modal = await loadModal(target);
+    }
+    focusables = Array.from(modal.querySelectorAll(focusableSelector));
+    previouslyFocusedElement = document.querySelector(":focus");
+    focusables[0].focus();
+    modal.style.display = null;
+    modal.removeAttribute("aria-hidden");
+    modal.setAttribute("aria-modal", "true");
+    modal.addEventListener("click", closeModal);
+    modal
+      .querySelector(".js-modal-close")
+      .addEventListener("click", closeModal);
+    modal
+      .querySelector(".js-modal-stop")
+      .addEventListener("click", stopPropagation);
   }
-}
+};
 
 const closeModal = function (e) {
-  
-  if (modal === null) return
-  e.preventDefault()
-  if (previouslyFocusedElement !== null) previouslyFocusedElement.focus()
-  window.setTimeout(function (){
-modal.style.display = "none"
-modal = null
-}, 500)
-  
-  modal.setAttribute("aria-hidden", "true")
-  modal.removeAttribute("aria-modal")
-  modal.removeEventListener("click", closeModal)
+  if (modal === null) return;
+  if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+  e.preventDefault();
+  modal.setAttribute("aria-hidden", "true");
+  modal.removeAttribute("aria-modal");
+  modal.removeEventListener("click", closeModal);
   modal
     .querySelector(".js-modal-close")
-    .removeEventListener("click", closeModal)
+    .removeEventListener("click", closeModal);
   modal
     .querySelector(".js-modal-stop")
-    .removeEventListener("click", stopPropagation)
-  
-}
+    .removeEventListener("click", stopPropagation);
+  const hideModal = function () {
+    modal.style.display = "none";
+    modal.removeEventListener("animationend", hideModal);
+    modal = null;
+  };
+  modal.addEventListener("animationend", hideModal);
+};
 
 const stopPropagation = function (e) {
-  e.stopPropagation()
-}
+  e.stopPropagation();
+};
 const focusInModal = function (e) {
-  e.preventDefault()
-  let index = focusables.findIndex((f) => f === modal.querySelector(":focus"))
+  e.preventDefault();
+  let index = focusables.findIndex((f) => f === modal.querySelector(":focus"));
   if (e.shiftkey === true) {
-    index--
-  }else{
-    index++
+    index--;
+  } else {
+    index++;
   }
-  if (index >= focusables.length){
-    index = 0
+  if (index >= focusables.length) {
+    index = 0;
   }
   if (index < 0) {
-    index = focusables.length - 1
+    index = focusables.length - 1;
   }
-  focusables[index].focus()
-}
+  focusables[index].focus();
+};
+
+const loadModal = async function (url) {
+  const html = await fetch(url).then((response) => response.text());
+  console.log(html);
+};
 
 document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal)
-})
+  a.addEventListener("click", openModal);
+});
 
 window.addEventListener("keydown", function (e) {
   if (e.key === "Escape" || e.key == "esc") {
-    closeModal(e)
+    closeModal(e);
   }
   if (e.key === "tab" && modal !== null) {
-    focusInModal(e)
+    focusInModal(e);
   }
-})
+});
