@@ -73,7 +73,7 @@ const init = async () => {
 };
 
 init();
-
+//pour cacher mes projet une fois connecter
 if (isAdmin !== null) {
   console.log('dans ces accolades, tu geres le mode admin')
   filtres.style.display = 'none';

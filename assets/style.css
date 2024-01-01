@@ -240,6 +240,17 @@ background-color: white;
 max-width: calc(100vw - 20px);
 max-height: calc(100vh - 20px);
 overflow: auto;
+animation: slideFromTop .5s both;
 }
 
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1; }
+}	
+	
 
+@keyframes slideFromTop {
+	from {transform: translateY(-50px);}
+	to {transform: translateY(0px); }
+}	
+	
