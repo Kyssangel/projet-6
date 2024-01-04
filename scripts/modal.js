@@ -8,6 +8,7 @@ const openModal = async function (e) {
     closeModal(e);
     modal = null;
   }
+ 
   if (!modal) {
     e.preventDefault();
     const target = e.target.getAttribute("href");
@@ -29,6 +30,7 @@ const openModal = async function (e) {
     modal
       .querySelector(".js-modal-stop")
       .addEventListener("click", stopPropagation);
+  
   }
 };
 
@@ -74,8 +76,17 @@ const focusInModal = function (e) {
 };
 
 const loadModal = async function (url) {
+  const target = "#" + url.split("#")[1];
+  const exitingModal = document.querySelector(target)
+  if (exitingModal !==null) return  exitingModal
   const html = await fetch(url).then((response) => response.text());
-  console.log(html);
+  const element = document
+    .createRange()
+    .createContextualFragment(html)
+    .querySelector(target);
+   if (element === null) throw 'élément' ; {target}'na pas été trouvé dans la page' ;{url}
+  document.body.append(element)
+  return element
 };
 
 document.querySelectorAll(".js-modal").forEach((a) => {

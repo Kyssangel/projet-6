@@ -308,7 +308,7 @@ footer nav ul {
   background: rgba(0, 0, 0, 0.8);
   align-items: center;
   justify-content: center;
-  animation: fadeIn 1s both;
+  animation: fadeIn .3s both;
 }
 #modifier-btn {
 	display: flex;
@@ -329,7 +329,7 @@ bottom: 52px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
   overflow: auto;
-  animation: slideFromTop 1s both;
+  animation: slideFromTop .5s both;
 }
 
 .modal[aria-hidden="true"] {
