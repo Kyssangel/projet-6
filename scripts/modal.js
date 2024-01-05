@@ -8,19 +8,21 @@ const openModal = async function (e) {
     closeModal(e);
     modal = null;
   }
- 
+
   if (!modal) {
     e.preventDefault();
-    const target = e.target.getAttribute("href");
+   /* const target = e.target.getAttribute("href");
     if (target.startsWith("#")) {
       modal = document.querySelector(target);
     } else {
       modal = await loadModal(target);
-    }
+    }*/
+    modal = document.querySelector(e.target.getAttribute('href'))
+    console.log('open', e.target)
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
     previouslyFocusedElement = document.querySelector(":focus");
+    modal.style.display = 'flex';
     focusables[0].focus();
-    modal.style.display = null;
     modal.removeAttribute("aria-hidden");
     modal.setAttribute("aria-modal", "true");
     modal.addEventListener("click", closeModal);
@@ -30,7 +32,6 @@ const openModal = async function (e) {
     modal
       .querySelector(".js-modal-stop")
       .addEventListener("click", stopPropagation);
-  
   }
 };
 
@@ -47,12 +48,13 @@ const closeModal = function (e) {
   modal
     .querySelector(".js-modal-stop")
     .removeEventListener("click", stopPropagation);
-  const hideModal = function () {
-    modal.style.display = "none";
-    modal.removeEventListener("animationend", hideModal);
-    modal = null;
-  };
-  modal.addEventListener("animationend", hideModal);
+  modal.style.display = 'none'
+  // const hideModal = function () {
+  //   modal.style.display = "none";
+  //   modal.removeEventListener("animationend", hideModal);
+  //   modal = null;
+  // };
+  // modal.addEventListener("animationend", hideModal);
 };
 
 const stopPropagation = function (e) {
@@ -75,19 +77,19 @@ const focusInModal = function (e) {
   focusables[index].focus();
 };
 
-const loadModal = async function (url) {
+/*onst loadModal = async function (url) {
   const target = "#" + url.split("#")[1];
-  const exitingModal = document.querySelector(target)
-  if (exitingModal !==null) return  exitingModal
+  const exitingModal = document.querySelector(target);
+  
+  if (exitingModal !== null) return exitingModal;
   const html = await fetch(url).then((response) => response.text());
-  const element = document
+ const element = document
     .createRange()
     .createContextualFragment(html)
     .querySelector(target);
-   if (element === null) throw 'élément' ; {target}'na pas été trouvé dans la page' ;{url}
-  document.body.append(element)
-  return element
-};
+    console.log(html)
+    console.log(html, target)
+};*/
 
 document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
@@ -101,3 +103,4 @@ window.addEventListener("keydown", function (e) {
     focusInModal(e);
   }
 });
+

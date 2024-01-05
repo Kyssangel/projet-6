@@ -331,13 +331,35 @@ bottom: 52px;
   overflow: auto;
   animation: slideFromTop .5s both;
 }
+h3#titlemodal {
+text-align: center;
+padding-top: 40px;
+font-size: 26px;
+font-weight: 400;
+}
+h3#titlemodal2{
+  text-align: center;
+padding-top: 40px;
+font-size: 26px;
+font-weight: 400;
+}
+button.js-modal-close{
+position: relative;
+left: 95%;
+bottom: 16%;
+background: white;
+border: none;
+width: 24px;
+height: 24px;
+}
 
-.modal[aria-hidden="true"] {
+
+/* .modal[aria-hidden="true"] {
   animation-name: fadeOut;
 }
 .modal[aria-hidden="true"].modal-wrapper {
   animation-name: slideToBottom;
-}
+} */
 
 @keyframes fadeIn {
   from {
@@ -371,4 +393,16 @@ bottom: 52px;
   to {
     transform: translateY(50px);
   }
+}
+
+.modal-content {
+  display: grid;
+  width: 90%;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 150px;
 }

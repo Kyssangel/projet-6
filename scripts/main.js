@@ -1,5 +1,6 @@
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
+const modalContent = document.querySelector('.modal-content');
 
 let works = [];
 let categories = [];
@@ -31,6 +32,20 @@ const createWorks = (works) => {
     figure.appendChild(figcaption);
 
     gallery.appendChild(figure);
+  });
+};
+
+const createModalWorks = (works) => {
+  works.forEach((work) => {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+
+    image.src = work.imageUrl;
+    image.alt = work.title;
+
+    figure.appendChild(image);
+
+    modalContent.appendChild(figure);
   });
 };
 
@@ -68,6 +83,7 @@ const init = async () => {
   await getWorks();
   await getCategories();
   createWorks(works);
+  createModalWorks(works);
   createFilters(categories);
 };
 
@@ -76,4 +92,7 @@ init();
 if (isAdmin !== null) {
   console.log("dans ces accolades, tu geres le mode admin");
   filtres.style.display = "none";
+  
 }
+
+
