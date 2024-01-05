@@ -11,12 +11,7 @@ const openModal = async function (e) {
 
   if (!modal) {
     e.preventDefault();
-   /* const target = e.target.getAttribute("href");
-    if (target.startsWith("#")) {
-      modal = document.querySelector(target);
-    } else {
-      modal = await loadModal(target);
-    }*/
+  
     modal = document.querySelector(e.target.getAttribute('href'))
     console.log('open', e.target)
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
@@ -49,12 +44,7 @@ const closeModal = function (e) {
     .querySelector(".js-modal-stop")
     .removeEventListener("click", stopPropagation);
   modal.style.display = 'none'
-  // const hideModal = function () {
-  //   modal.style.display = "none";
-  //   modal.removeEventListener("animationend", hideModal);
-  //   modal = null;
-  // };
-  // modal.addEventListener("animationend", hideModal);
+
 };
 
 const stopPropagation = function (e) {
@@ -77,19 +67,6 @@ const focusInModal = function (e) {
   focusables[index].focus();
 };
 
-/*onst loadModal = async function (url) {
-  const target = "#" + url.split("#")[1];
-  const exitingModal = document.querySelector(target);
-  
-  if (exitingModal !== null) return exitingModal;
-  const html = await fetch(url).then((response) => response.text());
- const element = document
-    .createRange()
-    .createContextualFragment(html)
-    .querySelector(target);
-    console.log(html)
-    console.log(html, target)
-};*/
 
 document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
