@@ -58,7 +58,9 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <a href="#modal1" id="modifier-btn" class="js-modal"><i class="fa-regular fa-pen-to-square modifier"></i>modifier</a>
+        <a href="#modal1" id="modifier-btn" class="js-modal"
+          ><i class="fa-regular fa-pen-to-square modifier"></i>modifier</a
+        >
 
         <div class="filtres"></div>
 
@@ -86,27 +88,39 @@
       aria-labelledby="titlemodal"
       style="display: none"
     >
-      <div class="modal-wrapper js-modal-stop">
+      <div class="modal-wrapper js-modal-stop js-delete-work">
         <h3 id="titlemodal">Galerie photo</h3>
-        <button class="js-modal-close"><i class="fa-solid fa-xmark "></i></button>
+        <button class="js-modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <div class="modal-content"></div>
-        <a href="#modal2" class="js-modal">Vers modale 2</a>
+        <div class="ajouté">
+          <a href="#modal2" class="js-modal ajouter">Ajouter une photo</a>
+        </div>
+        <div class="js-projet-1">
+          <button class="js-delete-work" data-project-id="1"><i class="fa-regular fa-trash-can"></i></button>
+      </div>
       </div>
     </aside>
     <aside
-    id="modal2"
-    class="modal"
-    aria-hidden="true"
-    role="dialog"++
-    aria-labelledby="titlemodal2"
-    style="display: none"
-  >
-    <div class="modal-wrapper js-modal-stop">
-      <h3 id="titlemodal1">Ajout de photo</h3>
-      <a href="#modal1" class="js-modal">&larr;</a>
-      <button class="js-modal-close"><i class="fa-solid fa-xmark "></i></button>
-    </div>
-  </aside>
+      id="modal2"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      ++
+      aria-labelledby="titlemodal2"
+      style="display: none"
+    >
+      <div class="modal-wrapper js-modal-stop">
+        <h3 id="titlemodal1">Ajout de photo</h3>
+        <a href="#modal1" class="js-modal left">&xlarr;</a>
+        <button class="js-modal-close close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    	
+      
+    </aside>
     <footer>
       <nav>
         <ul>

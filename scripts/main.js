@@ -1,6 +1,6 @@
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
-const modalContent = document.querySelector('.modal-content');
+const modalContent = document.querySelector(".modal-content");
 
 let works = [];
 let categories = [];
@@ -85,6 +85,7 @@ const init = async () => {
   createWorks(works);
   createModalWorks(works);
   createFilters(categories);
+  deleteWork(works);
 };
 
 init();
@@ -92,7 +93,55 @@ init();
 if (isAdmin !== null) {
   console.log("dans ces accolades, tu geres le mode admin");
   filtres.style.display = "none";
-  
+}
+
+/*gestion supression img*/
+const btnDelete = document.querySelector(".js-delete-work");
+// Event listener sur les boutons supprimer par apport a leur id
+function deleteWork() {
+  let btnDelete = document.querySelectorAll(".js-delete-work");
+  for (let i = 0; i < btnDelete.length; i++) {
+    btnDelete[i].addEventListener("click", deleteProjets);
+  }
+}
+
+// Supprimer le projet
+async function deleteProjets() {
+  console.log("DEBUG DEBUT DE FUNCTION SUPRESSION");
+  console.log(this.classList[0]);
+  console.log(token);
+
+  await fetch(`http://localhost:5678/api/works/${this.classList[0]}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((response) => {
+      console.log(response);
+      // Token good
+      if (response.status === 204) {
+        console.log("DEBUG SUPPRESION DU PROJET " + this.classList[0]);
+        refreshPage(this.classList[0]);
+      }
+      // Token inorrect
+      else if (response.status === 401) {
+        alert(
+          "Vous n'êtes pas autorisé à supprimer ce projet, merci de vous connecter avec un compte valide"
+        );
+        window.location.href = "login.html";
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// Rafraichit les projets sans recharger la page
+async function refreshPage(i) {
+  modaleProjets(); // Re lance une génération des projets dans la modale admin
+
+  // supprime le projet de la page d'accueil
+  const projet = document.querySelector(`.js-projet-${i}`);
+  projet.style.display = "none";
 }
 
 
