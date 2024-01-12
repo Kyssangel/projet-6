@@ -414,10 +414,29 @@ button.js-modal-close {
   padding-bottom: 50px;
 }
 
+.modal-content figure {
+  position: relative;
+}
+
 .modal-content img {
   width: 76.86px;
   height: 102.57px;
   object-fit: cover;
+}
+
+.modal-content .delete-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: none;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 a.js-modal.ajouter {
   display: flex;
