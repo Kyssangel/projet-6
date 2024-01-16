@@ -96,14 +96,7 @@
         <div class="modal-content"></div>
         <div class="ajouté">
           <a href="#modal2" class="js-modal ajouter">Ajouter une photo</a>
-          
-          <div class="js-projet-1">
-            <button class="js-delete-work" data-project-id="1">
-              <i class="fa-regular fa-trash-can"></i>
-            </button>
         </div>
-      </div>
-      
       </div>
     </aside>
     <aside
@@ -111,7 +104,6 @@
       class="modal"
       aria-hidden="true"
       role="dialog"
-      ++
       aria-labelledby="titlemodal2"
       style="display: none"
     >
@@ -121,6 +113,38 @@
         <button class="js-modal-close close">
           <i class="fa-solid fa-xmark"></i>
         </button>
+
+        <form class="ajout-photo">
+          <div class="ajout">
+            <label for="avatar"><i class="fa-regular fa-image"></i></label>
+            <button>
+              <input
+                type="file"
+                id="avatar"
+                name="avatar"
+                accept="image/png, image/jpeg"
+                style="display: none"
+              />+ Ajouter photo</button
+            ><span>jpg, png:4mo max</span>
+          </div>
+          <div class="form-titre">
+            <label for="titre" class="titre">Titre</label>
+            <input type="text" name="titre" id="name" required />
+            <label for="categorie" class="titre">categorie</label>
+
+            <select name="categorie" id="categorie">
+              <option value=""></option>
+              <option value="Bar & Restaurant">Bar & Restaurant</option>
+              <option value="Hotel">Hôtel</option>
+              <option value="Cuisine">Cuisine</option>
+              <option value="Paysage">Paysage</option>
+              <option value="Villa">Villa</option>
+            </select>
+          </div>
+          <div class="btn">
+            <button class="btn-valider">Valider</button>
+          </div>
+        </form>
       </div>
     </aside>
     <footer>
@@ -130,7 +154,7 @@
         </ul>
       </nav>
     </footer>
-  
+
     <script src="./scripts/main.js"></script>
     <script src="./scripts/modal.js"></script>
   </body>

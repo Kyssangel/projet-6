@@ -293,8 +293,6 @@ footer nav ul {
   box-sizing: border-box;
 }
 
-
-
 .modal {
   position: fixed;
   display: flex;
@@ -479,5 +477,94 @@ button.js-modal-close.close {
   bottom: 75px;
   font-size: 24px;
 }
+/******Modal2***/
+.ajout-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ajout {
+  display: flex;
+  width: 420px;
+  height: 168px;
+  border-radius: 3px;
+  background: #e8f1f6;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+i.fa-regular.fa-image {
 
-
+  font-size: 76px;
+  color: #b9c5cc;
+  margin-bottom: 10px;
+}
+input#avatar {
+  font-size: 22px;
+  width: 420px;
+  height: 168px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+.ajout-photo span {
+  font-family: Work Sans;
+  font-size: 10px;
+  width: 94px;
+  height: 12px;
+  padding-top: 5px;
+  font-weight: 400;
+}
+.ajout-photo button {
+  width: 173px;
+  height: 36px;
+  border-radius: 50px;
+  background: #cbd6dc;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  text-align: center;
+  color: #306685;
+}
+label.titre {
+  font-family: Work Sans;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+input#name {
+  width: 420px;
+  height: 51px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px #00000017;
+}
+select#categorie {
+  width: 420px;
+  height: 51px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px #00000017;
+}
+.btn {
+  height: 100px;
+  padding: 30px 0 0px 0;
+}
+button.btn-valider {
+  width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  background: #1d6154;
+  color: white;
+  border: none;
+  font-size: 16px;
+}
+.form-titre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 45px;
+  border-bottom: 1px solid #b3b3b3;
+}
