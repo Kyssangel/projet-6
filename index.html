@@ -104,45 +104,50 @@
       class="modal"
       aria-hidden="true"
       role="dialog"
-      aria-labelledby="titlemodal2"
+      aria-labelledby="titlemodal1"
       style="display: none"
     >
       <div class="modal-wrapper js-modal-stop">
         <h3 id="titlemodal1">Ajout de photo</h3>
-        <a href="#modal1" class="js-modal left">&xlarr;</a>
+        <a href="#modal1" class="js-modal left">&larr;</a>
         <button class="js-modal-close close">
           <i class="fa-solid fa-xmark"></i>
         </button>
 
         <form class="ajout-photo">
           <div class="ajout">
-            <label for="avatar"><i class="fa-regular fa-image"></i></label>
-            <button>
-              <input
-                type="file"
-                id="avatar"
-                name="avatar"
-                accept="image/png, image/jpeg"
-                style="display: none"
-              />+ Ajouter photo</button
-            ><span>jpg, png:4mo max</span>
-          </div>
-          <div class="form-titre">
-            <label for="titre" class="titre">Titre</label>
-            <input type="text" name="titre" id="name" required />
-            <label for="categorie" class="titre">categorie</label>
+            <i class="fa-regular fa-image"></i>
+            <label for="fileInput">+ Ajouter photo</label>
 
-            <select name="categorie" id="categorie">
+            <input
+              type="file"
+              id="fileInput"
+              class="js-image"
+              name="image"
+              accept="image/png, image/jpeg"
+              style="display: none"
+            />
+            <img id="previewImage" alt="Aperçu de l'image" style="max-width: 300px; max-height: 300px; display: none;">
+            <span>jpg, png: 4mo max</span>
+          </div>
+          <div id="imageContainer"></div>
+
+          <div class="form-titre">
+            <label for="titre" class="title">Titre</label>
+            <input type="text" name="title" id="titre" required />
+            <label for="categorie" class="title">categorie</label>
+
+            <select name="category" id="categorie" class="js-categoryId">
               <option value=""></option>
-              <option value="Bar & Restaurant">Bar & Restaurant</option>
-              <option value="Hotel">Hôtel</option>
-              <option value="Cuisine">Cuisine</option>
-              <option value="Paysage">Paysage</option>
-              <option value="Villa">Villa</option>
+              <option value="1">Bar & Restaurant</option>
+              <option value="2">Hôtel</option>
+              <option value="3">Cuisine</option>
+              <option value="4">Paysage</option>
+              <option value="5">Villa</option>
             </select>
           </div>
           <div class="btn">
-            <button class="btn-valider">Valider</button>
+            <button class="btn-valider" >Valider</button>
           </div>
         </form>
       </div>

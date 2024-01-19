@@ -319,14 +319,15 @@ footer nav ul {
 }
 
 .modal-wrapper {
-  width: 600px;
-  height: 400px;
+  width: 630px;
+  height: 688px;
   padding: 20px;
   background-color: white;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
   overflow: auto;
   animation: slideFromTop 0.5s both;
+  border-radius: 10px;
 }
 h3#titlemodal {
   text-align: center;
@@ -362,12 +363,6 @@ button.js-modal-close {
   font-size: 24px;
 }
 
-/* .modal[aria-hidden="true"] {
-  animation-name: fadeOut;
-}
-.modal[aria-hidden="true"].modal-wrapper {
-  animation-name: slideToBottom;
-} */
 
 @keyframes fadeIn {
   from {
@@ -450,19 +445,18 @@ a.js-modal.ajouter {
   left: 35%;
   text-decoration: none;
 }
-
-.left {
-  position: relative;
-  text-decoration: none;
+a.js-modal.left {
+position: relative;
   font-size: 30px;
   font-weight: 900;
   color: #000;
-  padding: 1px, 0px, 1.99px, 0px;
+  
   bottom: 70px;
   padding-left: 10px;
   font-size: 35px;
-  width: 20px;
-  height: 21px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 .ajouté {
   padding-bottom: 60px;
@@ -514,7 +508,7 @@ input#avatar {
   padding-top: 5px;
   font-weight: 400;
 }
-.ajout-photo button {
+.ajout-photo .ajout label {
   width: 173px;
   height: 36px;
   border-radius: 50px;
@@ -525,8 +519,12 @@ input#avatar {
   border: none;
   text-align: center;
   color: #306685;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-label.titre {
+label.title {
   font-family: Work Sans;
   font-size: 16px;
   font-weight: 500;
@@ -536,7 +534,7 @@ label.titre {
   padding-top: 30px;
   padding-bottom: 10px;
 }
-input#name {
+input#titre {
   width: 420px;
   height: 51px;
   border: none;
@@ -567,4 +565,10 @@ button.btn-valider {
   align-items: center;
   padding-bottom: 45px;
   border-bottom: 1px solid #b3b3b3;
+}
+
+.temp-img {
+  height: 100%;
+  width: 200px;
+  object-fit: cover;
 }

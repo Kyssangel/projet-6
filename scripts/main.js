@@ -1,6 +1,7 @@
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
 const modalContent = document.querySelector(".modal-content");
+const photoForm = document.querySelector('.ajout-photo')
 
 let works = [];
 let categories = [];
@@ -111,7 +112,7 @@ const btnDelete = document.querySelector(".js-delete-work");
 function deleteWork() {
   let btnDelete = document.querySelectorAll(".js-delete-work");
   for (let i = 0; i < btnDelete.length; i++) {
-    btnDelete[i].addEventListener("click", deleteProjets);
+    btnDelete[i].addEventListener("click", deleteProjet);
   }
 }
 
@@ -142,3 +143,102 @@ async function updateUi() {
   createWorks(works);
   createModalWorks(works);
 }
+
+//////////////////////
+
+
+
+
+
+/*document.addEventListener('DOMContentLoaded', function () {
+  var fileInput = document.getElementById('fileInput');
+
+  // Add an event listener to the file input element
+  fileInput.addEventListener('change', function (event) {
+      var selectedFile = event.target.files[0];
+
+      if (selectedFile) {
+          // Do something with the selected file
+          console.log('Selected file:', selectedFile);
+
+          // Example: Display the selected image
+          displayImage(selectedFile);
+      }
+  });
+
+  function displayImage(file) {
+      // Create a FileReader to read the file
+      var reader = new FileReader();
+
+      // Define a callback for when the file is loaded
+      reader.onload = function (e) {
+          // Create an image element and set its source to the loaded data
+          var image = document.createElement('img');
+          image.src = e.target.result;
+
+          // Append the image to the document (you can customize this part)
+          document.body.appendChild(image);
+      };
+
+      // Read the file as a data URL (this will trigger the onload callback)
+      reader.readAsDataURL(file);
+  }
+});*/
+document.addEventListener('DOMContentLoaded', function () {
+  var fileInput = document.getElementById('fileInput');
+  var imageContainer = document.querySelector('.ajout');
+
+  fileInput.addEventListener('change', function (event) {
+      var selectedFile = event.target.files[0];
+
+      if (selectedFile) {
+          // Display the selected image
+          displayImage(selectedFile);
+      }
+  });
+
+  function displayImage(file) {
+      // Create a FileReader to read the file
+      var reader = new FileReader();
+      const existingImg = document.querySelector('.temp-img')
+      if (existingImg) {
+        existingImg.remove()
+      }
+
+      // Define a callback for when the file is loaded
+      reader.onload = function (e) {
+          // Create an image element and set its source to the loaded data
+          var image = document.createElement('img');
+          image.src = e.target.result;
+          image.classList.add('temp-img')
+
+          // Append the image to the image container
+          imageContainer.appendChild(image);
+      };
+
+      // Read the file as a data URL (this will trigger the onload callback)
+      reader.readAsDataURL(file);
+  }
+});
+
+const postWork = async(data) => {
+  return await fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${isAdmin}`,
+    },
+    body: data,
+  })
+}
+
+photoForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const data = new FormData(photoForm)
+
+  for (const [key, value] of data) {
+    console.log(`${key}: ${value}\n`);
+  }
+  
+  const response = await postWork(data)
+  console.log(response)
+})
