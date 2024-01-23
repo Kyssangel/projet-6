@@ -306,18 +306,19 @@ footer nav ul {
   justify-content: center;
   animation: fadeIn 0.3s both;
 }
-#modifier-btn {
+a#modifier-btn.js-modal {
   display: flex;
   color: #000;
-  gap: 10px;
-  width: 84px;
+   width: 84px;
   height: 18px;
   position: relative;
   left: 62%;
   bottom: 52px;
   text-decoration: none;
 }
-
+.fa-edit:before, .fa-pen-to-square:before{
+  padding-right: 5px;
+}
 .modal-wrapper {
   width: 630px;
   height: 688px;
@@ -412,7 +413,7 @@ button.js-modal-close {
 }
 
 .modal-content img {
-  width: 76.86px;
+  width: 100%;
   height: 102.57px;
   object-fit: cover;
 }
@@ -420,7 +421,7 @@ button.js-modal-close {
 .modal-content .delete-button {
   position: absolute;
   top: 5px;
-  right: 10px;
+  right: 5px;
   width: 20px;
   height: 20px;
   border-radius: 3px;
@@ -471,6 +472,12 @@ button.js-modal-close.close {
   bottom: 75px;
   font-size: 24px;
 }
+button.js-modal-close{
+  position: relative;
+  left: 90%;
+  bottom: 85px;
+  font-size: 24px;
+}
 /******Modal2***/
 .ajout-photo {
   display: flex;
@@ -478,6 +485,7 @@ button.js-modal-close.close {
   align-items: center;
 }
 .ajout {
+  position: relative;
   display: flex;
   width: 420px;
   height: 168px;
@@ -486,6 +494,7 @@ button.js-modal-close.close {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 i.fa-regular.fa-image {
 
@@ -568,7 +577,26 @@ button.btn-valider {
 }
 
 .temp-img {
+  position: absolute;
   height: 100%;
   width: 200px;
   object-fit: cover;
+  bottom: 0;
+}
+figure img{
+  height: 486.61px;
+  width: 100%;
+  object-fit: cover;
+}
+span.édition{
+  width: 100%;
+height: 59px;
+font-size: 16px;
+font-weight: 400;
+  display: flex;
+justify-content: center;
+align-items: center;
+background: #000;
+color: white;
+gap: 18px;
 }

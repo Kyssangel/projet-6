@@ -144,52 +144,13 @@ async function updateUi() {
   createModalWorks(works);
 }
 
-//////////////////////
 
-
-
-
-
-/*document.addEventListener('DOMContentLoaded', function () {
-  var fileInput = document.getElementById('fileInput');
-
-  // Add an event listener to the file input element
-  fileInput.addEventListener('change', function (event) {
-      var selectedFile = event.target.files[0];
-
-      if (selectedFile) {
-          // Do something with the selected file
-          console.log('Selected file:', selectedFile);
-
-          // Example: Display the selected image
-          displayImage(selectedFile);
-      }
-  });
-
-  function displayImage(file) {
-      // Create a FileReader to read the file
-      var reader = new FileReader();
-
-      // Define a callback for when the file is loaded
-      reader.onload = function (e) {
-          // Create an image element and set its source to the loaded data
-          var image = document.createElement('img');
-          image.src = e.target.result;
-
-          // Append the image to the document (you can customize this part)
-          document.body.appendChild(image);
-      };
-
-      // Read the file as a data URL (this will trigger the onload callback)
-      reader.readAsDataURL(file);
-  }
-});*/
 document.addEventListener('DOMContentLoaded', function () {
-  var fileInput = document.getElementById('fileInput');
-  var imageContainer = document.querySelector('.ajout');
+  const fileInput = document.getElementById('fileInput');
+  const imageContainer = document.querySelector('.ajout');
 
   fileInput.addEventListener('change', function (event) {
-      var selectedFile = event.target.files[0];
+      const selectedFile = event.target.files[0];
 
       if (selectedFile) {
           // Display the selected image
@@ -199,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function displayImage(file) {
       // Create a FileReader to read the file
-      var reader = new FileReader();
+      const reader = new FileReader();
       const existingImg = document.querySelector('.temp-img')
       if (existingImg) {
         existingImg.remove()
@@ -208,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Define a callback for when the file is loaded
       reader.onload = function (e) {
           // Create an image element and set its source to the loaded data
-          var image = document.createElement('img');
+          const image = document.createElement('img');
           image.src = e.target.result;
           image.classList.add('temp-img')
 
@@ -241,4 +202,35 @@ photoForm.addEventListener('submit', async (e) => {
   
   const response = await postWork(data)
   console.log(response)
+
+  if (response.status === 201) {
+    photoForm.reset()
+    
+  }
+  window.location.href = '/index.html';
 })
+
+const isLoggedIn = true; // Mettez la valeur appropriée selon votre logique de connexion.
+
+const estConnecte = true; // Remplacez ceci par votre logique de vérification de connexion.
+
+document.addEventListener('DOMContentLoaded', function () {
+  const modifierBtn = document.getElementById('modifier-btn');
+
+  // Vérifie si l'utilisateur est connecté
+  if (estConnecte) {
+    // Affiche le lien une fois connecté
+    modifierBtn.style.display = 'inline-block';
+  }
+});
+const édite = true; // Remplacez ceci par votre logique de vérification de connexion.
+
+document.addEventListener('DOMContentLoaded', function () {
+  const editionSpan = document.querySelector('.édition');
+
+  // Vérifie si l'utilisateur est connecté
+  if (édite) {
+    // Affiche le span une fois connecté
+    editionSpan.style.display = 'inline';
+  }
+});

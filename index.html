@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
+    <span class="édition" style="display: none;"><i class="fa-regular fa-pen-to-square"></i>Mode édition</span>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -58,7 +59,7 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <a href="#modal1" id="modifier-btn" class="js-modal"
+        <a href="#modal1" id="modifier-btn" class="js-modal" style="display: none;"
           ><i class="fa-regular fa-pen-to-square modifier"></i>modifier</a
         >
 
@@ -127,7 +128,11 @@
               accept="image/png, image/jpeg"
               style="display: none"
             />
-            <img id="previewImage" alt="Aperçu de l'image" style="max-width: 300px; max-height: 300px; display: none;">
+            <img
+              id="previewImage"
+              alt="Aperçu de l'image"
+              style="max-width: 300px; max-height: 300px; display: none"
+            />
             <span>jpg, png: 4mo max</span>
           </div>
           <div id="imageContainer"></div>
@@ -139,15 +144,13 @@
 
             <select name="category" id="categorie" class="js-categoryId">
               <option value=""></option>
-              <option value="1">Bar & Restaurant</option>
-              <option value="2">Hôtel</option>
-              <option value="3">Cuisine</option>
-              <option value="4">Paysage</option>
-              <option value="5">Villa</option>
+              <option value="1">Hôtel & Restaurants</option>
+              <option value="2">Appartements</option>
+              <option value="3">Objets</option>
             </select>
           </div>
           <div class="btn">
-            <button class="btn-valider" >Valider</button>
+            <button class="btn-valider">Valider</button>
           </div>
         </form>
       </div>
