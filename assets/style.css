@@ -224,6 +224,7 @@ li a:hover {
   color: #1d6154;
   line-height: 19px;
   font-weight: 700;
+  cursor: pointer;
 }
 .filtres button:hover {
   background: #1d6154;

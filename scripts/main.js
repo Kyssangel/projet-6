@@ -155,31 +155,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      // Display the selected image
+    // Afficher l'image sélectionnée
       displayImage(selectedFile);
     }
   });
 
   function displayImage(file) {
-    // Create a FileReader to read the file
+    // Crée un FileReader pour lire le fichier
     const reader = new FileReader();
     const existingImg = document.querySelector(".temp-img");
     if (existingImg) {
       existingImg.remove();
     }
 
-    // Define a callback for when the file is loaded
+   // Définir un rappel lorsque le fichier est chargé
     reader.onload = function (e) {
-      // Create an image element and set its source to the loaded data
+     // Crée un élément d'image et définit sa source sur les données chargées
       const image = document.createElement("img");
       image.src = e.target.result;
       image.classList.add("temp-img");
 
-      // Append the image to the image container
+      // Ajoute l'image au conteneur d'images
       imageContainer.appendChild(image);
     };
 
-    // Read the file as a data URL (this will trigger the onload callback)
+   // Lit le fichier en tant qu'URL de données (cela déclenchera le rappel onload)
     reader.readAsDataURL(file);
   }
 });
@@ -247,3 +247,7 @@ if (isAdmin !== null) {
             // L'utilisateur n'est pas connecté, laisser le texte en "Login"
             loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
         }
+
+    ///////////////
+       
+    
