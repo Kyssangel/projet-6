@@ -212,7 +212,19 @@ photoForm.addEventListener("submit", async (e) => {
 });
 
 /////////////
+/*const editionSpan = document.querySelector('.édition');
 
+// Récupérer l'élément div qui simule la présence de l'utilisateur connecté
+const userStatusDiv = document.getElementById('userStatus');
+
+// Vérifier si l'utilisateur est connecté
+if (isAdmin !== null) {
+    // Afficher l'élément span
+    editionSpan.style.display = 'inline-block';
+} else {
+    // L'utilisateur n'est pas connecté, masquer l'élément span
+    editionSpan.style.display = 'none';
+}*/
 
 // Vérifier si l'utilisateur est connecté
 if (isAdmin !== null) {
@@ -222,3 +234,16 @@ if (isAdmin !== null) {
     console.log("affichage modifier");
   modifierBtn.style.display = "inline-block";
 }
+//changement login en logout
+
+        // Récupérer l'élément li avec l'ID "loginLogout"
+        const loginLogoutLi = document.getElementById('loginLogout');
+
+        // Vérifier si l'utilisateur est connecté
+        if (isAdmin !== null) {
+            // Changer le texte de l'élément li en "Logout"
+            loginLogoutLi.innerHTML = '<a href="#">Logout</a>';
+        } else {
+            // L'utilisateur n'est pas connecté, laisser le texte en "Login"
+            loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
+        }
