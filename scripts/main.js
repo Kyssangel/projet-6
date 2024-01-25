@@ -1,7 +1,10 @@
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
 const modalContent = document.querySelector(".modal-content");
-const photoForm = document.querySelector('.ajout-photo')
+const photoForm = document.querySelector(".ajout-photo");
+// Récupérer l'élément span avec la classe "édition"
+const editionSpan = document.querySelector(".édition");
+const modifierBtn = document.getElementById("modifier-btn")
 
 let works = [];
 let categories = [];
@@ -144,93 +147,78 @@ async function updateUi() {
   createModalWorks(works);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById("fileInput");
+  const imageContainer = document.querySelector(".ajout");
 
-document.addEventListener('DOMContentLoaded', function () {
-  const fileInput = document.getElementById('fileInput');
-  const imageContainer = document.querySelector('.ajout');
+  fileInput.addEventListener("change", function (event) {
+    const selectedFile = event.target.files[0];
 
-  fileInput.addEventListener('change', function (event) {
-      const selectedFile = event.target.files[0];
-
-      if (selectedFile) {
-          // Display the selected image
-          displayImage(selectedFile);
-      }
+    if (selectedFile) {
+      // Display the selected image
+      displayImage(selectedFile);
+    }
   });
 
   function displayImage(file) {
-      // Create a FileReader to read the file
-      const reader = new FileReader();
-      const existingImg = document.querySelector('.temp-img')
-      if (existingImg) {
-        existingImg.remove()
-      }
+    // Create a FileReader to read the file
+    const reader = new FileReader();
+    const existingImg = document.querySelector(".temp-img");
+    if (existingImg) {
+      existingImg.remove();
+    }
 
-      // Define a callback for when the file is loaded
-      reader.onload = function (e) {
-          // Create an image element and set its source to the loaded data
-          const image = document.createElement('img');
-          image.src = e.target.result;
-          image.classList.add('temp-img')
+    // Define a callback for when the file is loaded
+    reader.onload = function (e) {
+      // Create an image element and set its source to the loaded data
+      const image = document.createElement("img");
+      image.src = e.target.result;
+      image.classList.add("temp-img");
 
-          // Append the image to the image container
-          imageContainer.appendChild(image);
-      };
+      // Append the image to the image container
+      imageContainer.appendChild(image);
+    };
 
-      // Read the file as a data URL (this will trigger the onload callback)
-      reader.readAsDataURL(file);
+    // Read the file as a data URL (this will trigger the onload callback)
+    reader.readAsDataURL(file);
   }
 });
 
-const postWork = async(data) => {
-  return await fetch('http://localhost:5678/api/works', {
-    method: 'POST',
+const postWork = async (data) => {
+  return await fetch("http://localhost:5678/api/works", {
+    method: "POST",
     headers: {
       Authorization: `Bearer ${isAdmin}`,
     },
     body: data,
-  })
-}
+  });
+};
 
-photoForm.addEventListener('submit', async (e) => {
-  e.preventDefault()
-  const data = new FormData(photoForm)
+photoForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = new FormData(photoForm);
 
   for (const [key, value] of data) {
     console.log(`${key}: ${value}\n`);
   }
-  
-  const response = await postWork(data)
-  console.log(response)
+
+  const response = await postWork(data);
+  console.log(response);
 
   if (response.status === 201) {
-    photoForm.reset()
-    
+    photoForm.reset();
   }
-  window.location.href = '/index.html';
-})
-
-const isLoggedIn = true; // Mettez la valeur appropriée selon votre logique de connexion.
-
-const estConnecte = true; // Remplacez ceci par votre logique de vérification de connexion.
-
-document.addEventListener('DOMContentLoaded', function () {
-  const modifierBtn = document.getElementById('modifier-btn');
-
-  // Vérifie si l'utilisateur est connecté
-  if (estConnecte) {
-    // Affiche le lien une fois connecté
-    modifierBtn.style.display = 'inline-block';
-  }
+  window.location.href = "/index.html";
 });
-const édite = true; // Remplacez ceci par votre logique de vérification de connexion.
 
-document.addEventListener('DOMContentLoaded', function () {
-  const editionSpan = document.querySelector('.édition');
+/////////////
 
-  // Vérifie si l'utilisateur est connecté
-  if (édite) {
-    // Affiche le span une fois connecté
-    editionSpan.style.display = 'inline';
-  }
-});
+
+// Vérifier si l'utilisateur est connecté
+if (isAdmin !== null) {
+  console.log("affichage mode édition");
+  editionSpan.style.display = "inline-block";
+
+    console.log("affichage modifier");
+  modifierBtn.style.display = "inline-block";
+}

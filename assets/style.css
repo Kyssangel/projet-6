@@ -307,18 +307,18 @@ footer nav ul {
   animation: fadeIn 0.3s both;
 }
 a#modifier-btn.js-modal {
-  display: flex;
+  display: block;
   color: #000;
-   width: 84px;
+   width: 110px;
   height: 18px;
   position: relative;
   left: 62%;
-  bottom: 52px;
+  bottom: 53px;
   text-decoration: none;
+  font-size: 18px;
+  font-weight:400 ;
 }
-.fa-edit:before, .fa-pen-to-square:before{
-  padding-right: 5px;
-}
+
 .modal-wrapper {
   width: 630px;
   height: 688px;
@@ -589,14 +589,16 @@ figure img{
   object-fit: cover;
 }
 span.édition{
-  width: 100%;
+  display: block;
+width: 100%;
 height: 59px;
-font-size: 16px;
+font-size: 18px;
 font-weight: 400;
-  display: flex;
-justify-content: center;
-align-items: center;
+padding-top: 20px;
+text-align: center;
 background: #000;
 color: white;
-gap: 18px;
+}
+.fa-regular.fa-pen-to-square{
+  padding-right: 16px;
 }
