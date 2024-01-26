@@ -44,6 +44,7 @@ const closeModal = function (e) {
     .querySelector(".js-modal-stop")
     .removeEventListener("click", stopPropagation);
   modal.style.display = "none";
+ 
 };
 
 const stopPropagation = function (e) {
