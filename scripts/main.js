@@ -250,4 +250,55 @@ if (isAdmin !== null) {
 
     ///////////////
        
+// Récupérer l'élément li avec l'ID "loginLogout"
+
+
+
+/*// Vérifier si l'utilisateur est connecté
+if (isAdmin !== null) {
+    // Changer le texte de l'élément li en "Logout"
+    loginLogoutLi.innerHTML = '<a href="#" id="logoutLink">Logout</a>';
+
+    // Récupérer l'élément lien de déconnexion avec l'ID "logoutLink"
     
+const logoutLink = document.getElementById('logoutLink');
+    // Ajouter un gestionnaire d'événements au clic sur le lien de déconnexion
+    logoutLink.addEventListener('click', function(event) {
+        // Empêcher le comportement par défaut du lien (par exemple, la navigation vers "#" dans ce cas)
+        event.preventDefault();
+
+        // Réinitialiser les informations de connexion (exemple: isAdmin)
+        isAdmin = null;
+        
+        
+        // Rediriger l'utilisateur vers la page de connexion
+        window.location.href = 'login.html';
+    });
+} else {
+    // L'utilisateur n'est pas connecté, laisser le texte en "Login"
+    loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
+}*/
+
+const logout = async () => {
+  try {
+    // Appel à votre endpoint de déconnexion côté serveur
+    const response = await fetch("http://localhost:5678/api/users/logout", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+
+    // Réinitialiser le token côté client
+    sessionStorage.removeItem("token");
+
+    // Rediriger l'utilisateur vers la page de connexion
+    window.location.href = 'login.html';
+  } catch (error) {
+    console.error("Une erreur s'est produite lors de la déconnexion :", error);
+  }
+};
+
+// Ajoutez cet événement sur un bouton ou un lien de déconnexion
+const logoutlink = document.getElementById("loginLogout"); // Remplacez "logoutButton" par l'ID ou la classe de votre bouton/lien
+logoutlink.addEventListener("click", logout);

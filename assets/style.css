@@ -590,8 +590,9 @@ figure img{
   object-fit: cover;
 }
 span.édition{
+
   display: block;
-width: 100%;
+width: 1440px;
 height: 59px;
 font-size: 18px;
 font-weight: 400;
@@ -599,6 +600,8 @@ padding-top: 20px;
 text-align: center;
 background: #000;
 color: white;
+margin-left: -150px;
+margin-right: -150px;
 }
 .fa-regular.fa-pen-to-square{
   padding-right: 16px;
