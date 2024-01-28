@@ -264,4 +264,33 @@ const logoutlink = document.getElementById("loginLogout");
 logoutlink.addEventListener("click", logout);
 
 ///////
+
+document.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById("fileInput");
  
+  const modalCloseButton2 = document.querySelector("#modal2 .js-modal-close");
+  const modalLeftLink2 = document.querySelector("#modal2 .js-modal.left");
+
+  // ...
+
+  // Ajoutez un gestionnaire d'événements pour la fermeture du modal2
+  modalCloseButton2.addEventListener("click", function () {
+    clearSelectedImage();
+  });
+
+  // Ajoutez un gestionnaire d'événements pour le lien "left" du modal2
+  modalLeftLink2.addEventListener("click", function () {
+    clearSelectedImage();
+  });
+
+  function clearSelectedImage() {
+    const existingImg = document.querySelector(".temp-img");
+    if (existingImg) {
+      existingImg.remove();
+      fileInput.value = null; // Réinitialise la valeur du champ de fichier pour supprimer le choix de fichier
+    }
+  }
+
+  // ...
+});
+
