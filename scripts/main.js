@@ -4,7 +4,7 @@ const modalContent = document.querySelector(".modal-content");
 const photoForm = document.querySelector(".ajout-photo");
 // Récupérer l'élément span avec la classe "édition"
 const editionSpan = document.querySelector(".édition");
-const modifierBtn = document.getElementById("modifier-btn")
+const modifierBtn = document.getElementById("modifier-btn");
 
 let works = [];
 let categories = [];
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-    // Afficher l'image sélectionnée
+      // Afficher l'image sélectionnée
       displayImage(selectedFile);
     }
   });
@@ -168,9 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
       existingImg.remove();
     }
 
-   // Définir un rappel lorsque le fichier est chargé
+    // Définir un rappel lorsque le fichier est chargé
     reader.onload = function (e) {
-     // Crée un élément d'image et définit sa source sur les données chargées
+      // Crée un élément d'image et définit sa source sur les données chargées
       const image = document.createElement("img");
       image.src = e.target.result;
       image.classList.add("temp-img");
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
       imageContainer.appendChild(image);
     };
 
-   // Lit le fichier en tant qu'URL de données (cela déclenchera le rappel onload)
+    // Lit le fichier en tant qu'URL de données (cela déclenchera le rappel onload)
     reader.readAsDataURL(file);
   }
 });
@@ -208,7 +208,7 @@ photoForm.addEventListener("submit", async (e) => {
   if (response.status === 201) {
     photoForm.reset();
   }
-  window.location.href = 'index.html';
+  window.location.href = "index.html";
 });
 
 /////////////
@@ -218,25 +218,25 @@ if (isAdmin !== null) {
   console.log("affichage mode édition");
   editionSpan.style.display = "inline-block";
 
-    console.log("affichage modifier");
+  console.log("affichage modifier");
   modifierBtn.style.display = "inline-block";
 }
 //changement login en logout
 
-        // Récupérer l'élément li avec l'ID "loginLogout"
-        const loginLogoutLi = document.getElementById('loginLogout');
+// Récupérer l'élément li avec l'ID "loginLogout"
+const loginLogoutLi = document.getElementById("loginLogout");
 
-        // Vérifier si l'utilisateur est connecté
-        if (isAdmin !== null) {
-            // Changer le texte de l'élément li en "Logout"
-            loginLogoutLi.innerHTML = '<a href="#">Logout</a>';
-        } else {
-            // L'utilisateur n'est pas connecté, laisser le texte en "Login"
-            loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
-        }
+// Vérifier si l'utilisateur est connecté
+if (isAdmin !== null) {
+  // Changer le texte de l'élément li en "Logout"
+  loginLogoutLi.innerHTML = '<a href="#">Logout</a>';
+} else {
+  // L'utilisateur n'est pas connecté, laisser le texte en "Login"
+  loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
+}
 
-    ///////////////
-       
+///////////////
+
 // deconnection link logout
 
 const logout = async () => {
@@ -245,7 +245,7 @@ const logout = async () => {
     const response = await fetch("http://localhost:5678/api/users/logout", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     });
 
@@ -253,25 +253,22 @@ const logout = async () => {
     sessionStorage.removeItem("token");
 
     // Rediriger l'utilisateur vers la page de connexion
-    window.location.href = 'login.html';
+    window.location.href = "index.html";
   } catch (error) {
     console.error("Une erreur s'est produite lors de la déconnexion :", error);
   }
 };
 
 // Ajoutez cet événement sur le lien de déconnexion
-const logoutlink = document.getElementById("loginLogout"); 
+const logoutlink = document.getElementById("loginLogout");
 logoutlink.addEventListener("click", logout);
 
 ///////
 
 document.addEventListener("DOMContentLoaded", function () {
   const fileInput = document.getElementById("fileInput");
- 
   const modalCloseButton2 = document.querySelector("#modal2 .js-modal-close");
   const modalLeftLink2 = document.querySelector("#modal2 .js-modal.left");
-
-  // ...
 
   // Ajoutez un gestionnaire d'événements pour la fermeture du modal2
   modalCloseButton2.addEventListener("click", function () {
@@ -290,7 +287,4 @@ document.addEventListener("DOMContentLoaded", function () {
       fileInput.value = null; // Réinitialise la valeur du champ de fichier pour supprimer le choix de fichier
     }
   }
-
-  // ...
 });
-
