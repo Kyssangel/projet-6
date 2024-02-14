@@ -1,8 +1,8 @@
+
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
 const modalContent = document.querySelector(".modal-content");
 const photoForm = document.querySelector(".ajout-photo");
-// Récupérer l'élément span avec la classe "édition"
 const editionSpan = document.querySelector(".édition");
 const modifierBtn = document.getElementById("modifier-btn");
 
@@ -23,6 +23,7 @@ const getCategories = async () => {
 };
 
 const createWorks = (works) => {
+  gallery.innerHTML = "";
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
@@ -40,6 +41,7 @@ const createWorks = (works) => {
 };
 
 const createModalWorks = (works) => {
+  modalContent.innerHTML = "";
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
@@ -71,23 +73,17 @@ const createFilter = (category) => {
 
   button.addEventListener("click", () => {
     if (category.id === 0) {
-      gallery.innerHTML = "";
       createWorks(works);
-      return;
+    } else {
+      const filteredWorks = works.filter((work) => work.categoryId === category.id);
+      createWorks(filteredWorks);
     }
-
-    const filteredWorks = works.filter(
-      (work) => work.categoryId === category.id
-    );
-
-    gallery.innerHTML = "";
-    createWorks(filteredWorks);
   });
 
   filtres.appendChild(button);
 };
 
-const createFilters = (categories) => {
+const createFilters = () => {
   createFilter({ id: 0, name: "Tous" });
   categories.forEach((category) => {
     createFilter(category);
@@ -99,50 +95,30 @@ const init = async () => {
   await getCategories();
   createWorks(works);
   createModalWorks(works);
-  createFilters(categories);
+  createFilters();
 };
 
 init();
-///////
-//pour cacher mes projet une fois connecter
+
 if (isAdmin !== null) {
-  console.log("dans ces accolades, tu geres le mode admin");
   filtres.style.display = "none";
 }
 
-/*gestion supression img*/
-const btnDelete = document.querySelector(".js-delete-work");
-// Event listener sur les boutons supprimer par apport a leur id
-function deleteWork() {
-  let btnDelete = document.querySelectorAll(".js-delete-work");
-  for (let i = 0; i < btnDelete.length; i++) {
-    btnDelete[i].addEventListener("click", deleteProjet);
-  }
-}
-
-// Supprimer le projet
 async function deleteProjet(id) {
-  console.log("DEBUG DEBUT DE FUNCTION SUPRESSION");
-
   const response = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${isAdmin}` },
   });
 
   if (response.status === 204) {
-    console.log('ici on refait l"ui');
+    console.log('Suppression réussie');
     updateUi();
-  }
-
-  if (!response.ok) {
+  } else {
     console.error(response);
   }
 }
 
-// Rafraichit les projets sans recharger la page
 async function updateUi() {
-  gallery.innerHTML = "";
-  modalContent.innerHTML = "";
   await getWorks();
   createWorks(works);
   createModalWorks(works);
@@ -156,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      // Afficher l'image sélectionnée
       displayImage(selectedFile);
     }
   });
@@ -178,8 +153,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     reader.readAsDataURL(file);
   }
-});
 
+  const modalCloseButton2 = document.querySelector("#modal2 .js-modal-close");
+  const modalLeftLink2 = document.querySelector("#modal2 .js-modal.left");
+
+  modalCloseButton2.addEventListener("click", function () {
+    clearSelectedImage();
+  });
+
+  modalLeftLink2.addEventListener("click", function () {
+    clearSelectedImage();
+  });
+
+  function clearSelectedImage() {
+    const existingImg = document.querySelector(".temp-img");
+    if (existingImg) {
+      existingImg.remove();
+      fileInput.value = null;
+    }
+  }
+});
 
 const postWork = async (data) => {
   const response = await fetch("http://localhost:5678/api/works", {
@@ -201,6 +194,11 @@ const updateProjects = async () => {
   modalContent.innerHTML = "";
   createWorks(works);
   createModalWorks(works);
+
+  const existingImg = document.querySelector(".temp-img");
+  if (existingImg) {
+    existingImg.remove();
+  }
 };
 
 photoForm.addEventListener("submit", async (e) => {
@@ -208,31 +206,19 @@ photoForm.addEventListener("submit", async (e) => {
 
   const data = new FormData(photoForm);
 
-  for (const [key, value] of data) {
-    console.log(`${key}: ${value}\n`);
-  }
-
   const response = await postWork(data);
   console.log(response);
 
   if (response.status === 201) {
     photoForm.reset();
     await updateProjects();
-    
   }
 });
 
-/////////////
-
-// Vérifier si l'utilisateur est connecté
 if (isAdmin !== null) {
-  console.log("affichage mode édition");
   editionSpan.style.display = "inline-block";
-
-  console.log("affichage modifier");
   modifierBtn.style.display = "inline-block";
 }
-//changement login en logout
 
 const loginLogoutLi = document.getElementById("loginLogout");
 
@@ -241,10 +227,6 @@ if (isAdmin !== null) {
 } else {
   loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
 }
-
-///////////////
-
-// deconnection link logout
 
 const logout = async () => {
   try {
@@ -255,42 +237,12 @@ const logout = async () => {
       },
     });
 
-    // Réinitialiser le token côté client
     sessionStorage.removeItem("token");
-
-    // Rediriger l'utilisateur vers la page de connexion
     window.location.href = "./index.html";
   } catch (error) {
     console.error("Une erreur s'est produite lors de la déconnexion :", error);
   }
 };
 
-// Ajoutez cet événement sur le lien de déconnexion
 const logoutlink = document.getElementById("loginLogout");
 logoutlink.addEventListener("click", logout);
-
-///////
-
-document.addEventListener("DOMContentLoaded", function () {
-  const fileInput = document.getElementById("fileInput");
-  const modalCloseButton2 = document.querySelector("#modal2 .js-modal-close");
-  const modalLeftLink2 = document.querySelector("#modal2 .js-modal.left");
-
-  // Ajoutez un gestionnaire d'événements pour la fermeture du modal2
-  modalCloseButton2.addEventListener("click", function () {
-    clearSelectedImage();
-  });
-
-  // Ajoutez un gestionnaire d'événements pour le lien "left" du modal2
-  modalLeftLink2.addEventListener("click", function () {
-    clearSelectedImage();
-  });
-
-  function clearSelectedImage() {
-    const existingImg = document.querySelector(".temp-img");
-    if (existingImg) {
-      existingImg.remove();
-      fileInput.value = null; // Réinitialise la valeur du champ de fichier pour supprimer le choix de fichier
-    }
-  }
-});

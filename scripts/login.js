@@ -60,6 +60,7 @@ baliseEmail.addEventListener("change", () => {
 //récuperer les évenement submit,éviter chargement de la page 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+ 
   const validatedEmail = verifierEmail(baliseEmail);
   const validatedPassword = verifierChamp(balisePassword);
 
@@ -84,5 +85,4 @@ form.addEventListener("submit", async (event) => {
     window.location.assign('/')
   }
 });
-
 
