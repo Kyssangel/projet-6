@@ -162,41 +162,50 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function displayImage(file) {
-    // Crée un FileReader pour lire le fichier
     const reader = new FileReader();
     const existingImg = document.querySelector(".temp-img");
     if (existingImg) {
       existingImg.remove();
     }
 
-    // Définir un rappel lorsque le fichier est chargé
     reader.onload = function (e) {
-      // Crée un élément d'image et définit sa source sur les données chargées
       const image = document.createElement("img");
       image.src = e.target.result;
       image.classList.add("temp-img");
 
-      // Ajoute l'image au conteneur d'images
       imageContainer.appendChild(image);
     };
 
-    // Lit le fichier en tant qu'URL de données (cela déclenchera le rappel onload)
     reader.readAsDataURL(file);
   }
 });
 
+
 const postWork = async (data) => {
-  return await fetch("http://localhost:5678/api/works", {
+  const response = await fetch("http://localhost:5678/api/works", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${isAdmin}`,
     },
     body: data,
   });
+
+  return response;
+};
+
+const updateProjects = async () => {
+  const response = await fetch("http://localhost:5678/api/works");
+  const works = await response.json();
+
+  gallery.innerHTML = "";
+  modalContent.innerHTML = "";
+  createWorks(works);
+  createModalWorks(works);
 };
 
 photoForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const data = new FormData(photoForm);
 
   for (const [key, value] of data) {
@@ -208,8 +217,9 @@ photoForm.addEventListener("submit", async (e) => {
 
   if (response.status === 201) {
     photoForm.reset();
+    await updateProjects();
+    
   }
-  window.location.href = "index.html";
 });
 
 /////////////
@@ -224,15 +234,11 @@ if (isAdmin !== null) {
 }
 //changement login en logout
 
-// Récupérer l'élément li avec l'ID "loginLogout"
 const loginLogoutLi = document.getElementById("loginLogout");
 
-// Vérifier si l'utilisateur est connecté
 if (isAdmin !== null) {
-  // Changer le texte de l'élément li en "Logout"
   loginLogoutLi.innerHTML = '<a href="#">Logout</a>';
 } else {
-  // L'utilisateur n'est pas connecté, laisser le texte en "Login"
   loginLogoutLi.innerHTML = '<a href="login.html">Login</a>';
 }
 
@@ -242,7 +248,6 @@ if (isAdmin !== null) {
 
 const logout = async () => {
   try {
-    // Appel à votre endpoint de déconnexion côté serveur
     const response = await fetch("http://localhost:5678/api/users/logout", {
       method: "POST",
       headers: {
@@ -254,7 +259,7 @@ const logout = async () => {
     sessionStorage.removeItem("token");
 
     // Rediriger l'utilisateur vers la page de connexion
-    window.location.href = "index.html";
+    window.location.href = "./index.html";
   } catch (error) {
     console.error("Une erreur s'est produite lors de la déconnexion :", error);
   }
