@@ -606,3 +606,9 @@ span.édition {
 .fa-regular.fa-pen-to-square {
   padding-right: 16px;
 }
+
+.filtres.hidden {
+  display: none;
+}
+
+

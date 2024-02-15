@@ -100,10 +100,16 @@ const init = async () => {
 
 init();
 
-if (isAdmin !== null) {
+/*if (isAdmin !== null) {
   filtres.style.display = "none";
+}*/
+if (isAdmin !== null) {
+  // Si l'utilisateur est connecté, ajoutez la classe 'isAdmin' à l'élément avec la classe 'filtres'
+  const filtresElement = document.querySelector('.filtres');
+  if (filtresElement) {
+    filtresElement.classList.add('hidden');
+  }
 }
-
 async function deleteProjet(id) {
   const response = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
