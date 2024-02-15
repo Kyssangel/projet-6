@@ -1,4 +1,3 @@
-
 const gallery = document.querySelector(".gallery");
 const filtres = document.querySelector(".filtres");
 const modalContent = document.querySelector(".modal-content");
@@ -75,7 +74,9 @@ const createFilter = (category) => {
     if (category.id === 0) {
       createWorks(works);
     } else {
-      const filteredWorks = works.filter((work) => work.categoryId === category.id);
+      const filteredWorks = works.filter(
+        (work) => work.categoryId === category.id
+      );
       createWorks(filteredWorks);
     }
   });
@@ -100,14 +101,10 @@ const init = async () => {
 
 init();
 
-/*if (isAdmin !== null) {
-  filtres.style.display = "none";
-}*/
 if (isAdmin !== null) {
-  // Si l'utilisateur est connecté, ajoutez la classe 'isAdmin' à l'élément avec la classe 'filtres'
-  const filtresElement = document.querySelector('.filtres');
+  const filtresElement = document.querySelector(".filtres");
   if (filtresElement) {
-    filtresElement.classList.add('hidden');
+    filtresElement.classList.add("hidden");
   }
 }
 async function deleteProjet(id) {
@@ -117,7 +114,7 @@ async function deleteProjet(id) {
   });
 
   if (response.status === 204) {
-    console.log('Suppression réussie');
+    console.log("Suppression réussie");
     updateUi();
   } else {
     console.error(response);
